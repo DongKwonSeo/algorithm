@@ -1,4 +1,3 @@
-
 // 이진 검색
 function binarySearch(arr, elem) {
   let start = 0;
