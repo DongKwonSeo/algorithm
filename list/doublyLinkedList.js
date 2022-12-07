@@ -45,4 +45,29 @@ class DoublyLinkedList {
     this.length--;
     return poppeNode;
   }
+  // shift 처음 노드 삭제
+  shift() {
+    if (this.length === 0) return undefined;
+    let oldHead = this.head;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    }
+    this.head = oldHead.next;
+    this.head.prev = null;
+    oldHead.next = null;
+    this.length--;
+    return oldHead;
+  }
+  // unshift 처음 노드 추가
+  unshift(val) {
+    let newNode = new Node(val);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+    }
+  }
 }
