@@ -103,4 +103,39 @@ class DoublyLinkedList {
     }
     return false;
   }
+  // insert 사용 하면 내가 원하는 위치에 중간에 노드를 삽입 할 수있다.
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) return this.unshift(val);
+    if (index === this.length) return this.push(val);
+
+    let newNode = new Node(val);
+    let beforeNode = this.get(index - 1);
+    console.log(beforeNode, "beforeNode");
+    let afterNode = beforeNode.next;
+
+    (beforeNode.next = newNode), (newNode.prev = beforeNode);
+    (newNode.next = afterNode), (afterNode.prev = newNode);
+    this.length++;
+    return true;
+  }
+  // remove 삭제를 한다
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    let removedNode = this.get(index);
+    let beforeNode = removedNode.prev;
+    let afterNode = removedNode.next;
+
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    // removedNode.prev.next.next = removedNode.next;
+    // removedNode.next.prev = removedNode.prev;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
+    return removedNode;
+  }
 }
